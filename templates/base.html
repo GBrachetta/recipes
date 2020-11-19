@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% block meta %}
+        <meta charset="UTF-8" />
+        <meta name="description"
+            content="Website of harpsichordist Guillermo Brachetta." />
+        <meta name="author" content="Guillermo Brachetta" />
+        <meta name="keywords"
+            content="Brachetta, music, harpsichord, baroque, art, concert, shop, recording" />
+        <meta name="application-name" content="Guillermo Brachetta" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        {% endblock meta %}
+        {% block css %}
+        <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/materia/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+        {% endblock css %}
+
+        {% block postcss %}
+        {% endblock postcss %}
+
+        {% block js %}
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous">
+            </script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.3/umd/popper.min.js"
+            integrity="sha512-sdrkWdHcsY+FX+Cp0Is6hnNkukQewnksFdGjyD6wEvcfBQfseLJWwE0hB3+DIlRndHx5cuFuf0RbLOBST4cjCA=="
+            crossorigin="anonymous">
+            </script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA=="
+            crossorigin="anonymous">
+            </script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/9464f43776.js"
+            crossorigin="anonymous">
+            </script>
+        <script src="{% static 'js/main.js' %}"></script>
+        {% endblock js %}
+
+        <title>
+            Elisa's Kitchen
+        </title>
+    </head>
+
+    <body">
+
+        <!--Header-->
+        {% include 'includes/_navbar.html' %}
+
+        <main>
+            <!--Messages-->
+            {% if messages %}
+            <div class="message-container"></div>
+            {% endif %}
+            <!--Extra Header-->
+            {% block extra_header %}
+            {% endblock extra_header %}
+
+            <!--Page Header-->
+            {% block page_header %}
+            {% endblock page_header %}
+
+            <!--Content-->
+            {% block content %}
+            {% endblock content %}
+        </main>
+
+        <!--Footer-->
+        {% include 'includes/_footer.html' %}
+
+        {% block postjs %}
+        {% endblock postjs %}
+    </body>
+
+</html>

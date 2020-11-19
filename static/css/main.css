@@ -1,0 +1,25 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("/media/background.jpeg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.navbar.navbar-dark form .md-form input:focus:not([readonly]) {
+  border-color: black;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.navbar .nav-item .nav-link {
+  font-size: 1rem;
+}
+
+.navbar .form-control {
+  font-size: 1rem;
+}
