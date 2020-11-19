@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 python-dotenv = "*"
+psycopg2 = "*"
+dj-database-url = "*"
+django-allauth = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 pylint-django = "*"
