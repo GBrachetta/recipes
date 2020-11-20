@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="white-overlay"></div>
+{% if recipes %}
+{% for recipe in recipes %}
+<div class="card text-white bg-primary">
+    <img class="card-img-top" src="" alt="">
+    <div class="card-body">
+        <h4 class="card-title">{{ recipe.name }}</h4>
+        <p class="card-text">Text</p>
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+{% endblock content %}

@@ -22,8 +22,8 @@ body {
 }
 
 .btn {
-  padding: .5rem 1.6rem;
-  font-size: .64rem;
+  padding: 0.5rem 1.6rem;
+  font-size: 0.64rem;
 }
 
 .btn-go {
@@ -32,6 +32,21 @@ body {
 
 .btn-back {
   background-color: #e8f3c1;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .navbar .nav-item .nav-link {
