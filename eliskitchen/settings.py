@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "django_cleanup.apps.CleanupConfig",
     "home",
+    "recipes",
 ]
 
 MIDDLEWARE = [
@@ -95,7 +96,7 @@ ACCOUNT_FORMS = {
     "add_email": "allauth.account.forms.AddEmailForm",
     "change_password": "allauth.account.forms.ChangePasswordForm",
     "set_password": "allauth.account.forms.SetPasswordForm",
-    "reset_password": "allauth.account.forms.ResetPasswordForm",
+    "reset_password": "eliskitchen.forms.SelfResetPasswordForm",
     "reset_password_from_key": "allauth.account.forms.ResetPasswordKeyForm",
     "disconnect": "allauth.socialaccount.forms.DisconnectForm",
 }

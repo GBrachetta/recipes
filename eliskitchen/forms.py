@@ -1,4 +1,4 @@
-from allauth.account.forms import LoginForm, SignupForm
+from allauth.account.forms import LoginForm, SignupForm, ResetPasswordForm
 
 
 class SelfLoginForm(LoginForm):
@@ -21,3 +21,12 @@ class SelfSignupForm(SignupForm):
         self.fields["username"].label = ""
         self.fields["password1"].label = ""
         self.fields["password2"].label = ""
+
+
+class SelfResetPasswordForm(ResetPasswordForm):
+    """Remove labels in allauth forms"""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["email"].label = ""
