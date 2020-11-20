@@ -39,8 +39,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a class="button secondaryAction btn btn-sm btn-warning text-primary" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction btn btn-sm btn-warning text-primary" type="submit">{% trans "Sign In" %}</button>
+  <a class="button secondaryAction btn btn-sm btn-back text-primary ml-0" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="primaryAction btn  btn-go text-primary" type="submit">{% trans "Sign In" %}</button>
 </form>
 
 {% endblock %}

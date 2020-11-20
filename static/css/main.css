@@ -6,7 +6,7 @@
 }
 
 body {
-  background: url("/media/background.jpeg") no-repeat center center fixed;
+  background: url("/media/background.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -19,6 +19,19 @@ body {
 .btn.discover-button {
   background-color: #ffb766;
   font-size: 1.5rem;
+}
+
+.btn {
+  padding: .5rem 1.6rem;
+  font-size: .64rem;
+}
+
+.btn-go {
+  background-color: #ead9f2;
+}
+
+.btn-back {
+  background-color: #e8f3c1;
 }
 
 .navbar .nav-item .nav-link {
