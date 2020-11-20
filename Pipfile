@@ -10,6 +10,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
+django-cleanup = "*"
 
 [dev-packages]
 pylint-django = "*"

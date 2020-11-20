@@ -28,8 +28,13 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <i class="fas fa-user"></i> Profile</a
-                    >
+                        <i class="fas fa-user"></i>
+                        {% if request.user.is_authenticated %}
+                        {{ request.user.username }}
+                        {% else %}
+                        Profile
+                        {% endif %}
+                    </a>
                     <div
                         class="dropdown-menu dropdown-menu-right dropdown-info"
                         aria-labelledby="navbarDropdownMenuLink-4"

@@ -33,6 +33,17 @@
       </ul>
     </div>
     {% block content %}
+    <div class="container">
+      <div class="white-overlay"></div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-12 col-md-6">
+                <div class="allauth-form-inner-content">
+                    {% block inner_content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
     {% endblock %}
     {% block extra_body %}
