@@ -16,6 +16,11 @@ body {
           box-shadow: none;
 }
 
+.btn.discover-button {
+  background-color: #ffb766;
+  font-size: 1.5rem;
+}
+
 .navbar .nav-item .nav-link {
   font-size: 1rem;
 }

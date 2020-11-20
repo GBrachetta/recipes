@@ -1,32 +1,61 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark secondary-color">
-
         <!-- Navbar brand -->
         <a class="navbar-brand" href="{% url 'home'%}">Elisa</a>
 
         <!-- Collapse button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#basicExampleNav"
+            aria-controls="basicExampleNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- Collapsible content -->
         <div class="collapse navbar-collapse" id="basicExampleNav">
-
             <!-- Links -->
             <ul class="navbar-nav mr-auto ml-lg-2">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i> Profile</a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="#">My account</a>
-                        <a class="dropdown-item" href="#">Log out</a>
+                    <a
+                        class="nav-link dropdown-toggle"
+                        id="navbarDropdownMenuLink-4"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        <i class="fas fa-user"></i> Profile</a
+                    >
+                    <div
+                        class="dropdown-menu dropdown-menu-right dropdown-info"
+                        aria-labelledby="navbarDropdownMenuLink-4"
+                    >
+                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                        <a href="" class="dropdown-item">Product Management</a>
+                        {% endif %}
+                        <a href="" class="dropdown-item">My Profile</a>
+                        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                        {% else %}
+                        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                        {% endif %}
                     </div>
                 </li>
             </ul>
 
             <form class="form-inline">
                 <div class="md-form my-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Search recipes"
+                        aria-label="Search"
+                    />
                 </div>
             </form>
         </div>
