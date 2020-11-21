@@ -67,11 +67,9 @@ class Recipe(models.Model):
         self.created = timezone.now()
         if self.image:
             self.thumbnail = make_thumbnail(self.image, size=(600, 600))
-
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
-        
 
     @property
     def thumbnail_preview(self):
