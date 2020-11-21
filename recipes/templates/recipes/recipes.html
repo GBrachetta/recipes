@@ -3,15 +3,63 @@
 {% block content %}
 <div class="white-overlay"></div>
 {% if recipes %}
-{% for recipe in recipes %}
-<div class="card text-white bg-primary">
-    <img class="card-img-top" src="" alt="">
-    <div class="card-body">
-        <h4 class="card-title">{{ recipe.name }}</h4>
-        <p class="card-text">Text</p>
+<div class="container mt-5">
+    <div class="row">
+        {% for recipe in recipes %}
+
+        <!-- Card -->
+        <div class="col col-md-6 col-lg-4 col-xl-3 mb-3">
+            <div class="card promoting-card">
+                <div class="card-body d-flex flex-row">
+                    <!-- Avatar -->
+                    <img src="{{ MEDIA_URL }}avatar.jpg" class="rounded-circle mr-3" height="50px" width="50px" alt="avatar">
+                    <!-- Content -->
+                    <div>
+                        <!-- Title -->
+                        <h4 class="card-title font-weight-bold mb-2">{{ recipe.name }}</h4>
+                        <!-- Subtitle -->
+                        <p class="card-text"><i class="far fa-clock pr-2"></i>{{ recipe.created|date:"dS M Y" }}</p>
+                    </div>
+                </div>
+                <!-- Card image -->
+                <div class="view overlay">
+                    {% if recipe.image %}
+                    <img class="card-img-top rounded-0" src="{{ recipe.thumbnail.url }}" alt="Card image cap">
+                    {% else %}
+                    <img class="card-img-top rounded-0" src="{{ MEDIA_URL }}noimage.png" alt="Card image cap">
+                    {% endif %}
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <!-- Card content -->
+                <div class="card-body">
+                    <div class="collapse-content">
+                        <!-- Text -->
+                        <!-- Button -->
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample-{{ recipe.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Description
+                        </a>
+                        <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i>
+                        <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i>
+                        <div class="collapse mt-3" id="collapseExample-{{ recipe.id }}">
+                            <div class="">
+                                {{ recipe.description|linebreaksbr }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
-{% endfor %}
+<div class="spacer"></div>
 {% endif %}
 {% endblock content %}

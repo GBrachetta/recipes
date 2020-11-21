@@ -66,3 +66,17 @@ body {
   background: white;
   z-index: -1;
 }
+
+.card-img-top {
+  height: 20vh;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.spacer {
+  height: 140px;
+}
+
+.card-title {
+  height: 3rem;
+}
