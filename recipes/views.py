@@ -11,7 +11,7 @@ def recipes(request):
     """Renders the recipes page"""
 
     all_recipes = Recipe.objects.all().order_by("-name")
-    paginator = Paginator(all_recipes, 2)
+    paginator = Paginator(all_recipes, 3)
     page = request.GET.get("page")
     paged_recipes = paginator.get_page(page)
 
@@ -90,3 +90,22 @@ def delete_recipe(request, recipe_id):
     recipe.delete()
     messages.success(request, "Recipe deleted.")
     return redirect(reverse("recipes"))
+
+
+def search(request):
+    """Performs search"""
+    queryset_list = Recipe.objects.order_by("-name")
+
+    # Keywords
+    if "keywords" in request.GET:
+        keywords = request.GET["keywords"]
+        if keywords:
+            queryset_list = queryset_list.filter(name__icontains=keywords)
+
+    template = "recipes/recipes.html"
+    context = {
+        "recipes": queryset_list,
+        "values": request.GET,
+        "from_search": True,
+    }
+    return render(request, template, context)

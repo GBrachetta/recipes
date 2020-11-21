@@ -46,9 +46,9 @@
                 </li>
             </ul>
 
-            <form class="form-inline">
+            <form action="{% url 'search' %}" class="form-inline">
                 <div class="md-form my-0">
-                    <input class="form-control mr-sm-2 search-placeholder" type="text"
+                    <input class="form-control mr-sm-2 search-placeholder" name="keywords" type="text"
                         placeholder="Search recipes" aria-label="Search" />
                 </div>
             </form>
