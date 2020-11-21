@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -8,6 +9,7 @@
 body {
   background: url("/media/background.jpg") no-repeat center center fixed;
   background-size: cover;
+  font-family: "Montserrat", sans-serif;
 }
 
 .navbar.navbar-dark form .md-form input:focus:not([readonly]) {
@@ -57,6 +59,11 @@ body {
   font-size: 1rem;
 }
 
+.navbar .dropdown-menu a:not(.active):hover {
+  color: #a6c !important;
+  font-weight: 600 !important;
+}
+
 .white-overlay {
   height: 100%;
   width: 100%;
@@ -79,4 +86,56 @@ body {
 
 .card-title {
   height: 3rem;
+}
+
+.collapse-content .fas.fa-heart:hover {
+  color: #f44336 !important;
+}
+
+.collapse-content .fas.fa-share-alt:hover {
+  color: #1170ff !important;
+}
+
+.form-check {
+  padding-left: 0;
+}
+
+.image-recipe {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.recipe-description {
+  margin-bottom: 2rem;
+}
+
+.image-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.instructions-title {
+  line-height: 3rem;
+  border-top: #ff8700 1px solid;
+  border-bottom: #ff8700 1px solid;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.recipe-instructions {
+  font-size: 1.2rem;
+  padding: 20px 0;
+}
+
+.recipe-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #cc6c00;
+}
+
+.recipe-details {
+  font-size: .9rem;
+  text-align: center;
 }
