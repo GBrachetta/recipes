@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .forms import RecipeForm
 from .models import Recipe
 
@@ -10,7 +11,11 @@ def recipes(request):
     """Renders the recipes page"""
 
     all_recipes = Recipe.objects.all().order_by("-name")
-    context = {"recipes": all_recipes, "recipe": "active"}
+    paginator = Paginator(all_recipes, 2)
+    page = request.GET.get("page")
+    paged_recipes = paginator.get_page(page)
+
+    context = {"recipes": paged_recipes, "recipe": "active"}
     return render(request, "recipes/recipes.html", context)
 
 

@@ -18,14 +18,11 @@ body {
           box-shadow: none;
 }
 
-.btn.discover-button {
-  background-color: #ffb766;
-  font-size: 1.5rem;
-}
-
 .btn {
   padding: 0.5rem 1.6rem;
-  font-size: 0.64rem;
+  font-size: 0.74rem !important;
+  color: #2f2f2f !important;
+  font-weight: 500 !important;
 }
 
 .btn-go {
@@ -55,6 +52,12 @@ body {
   cursor: pointer;
 }
 
+.btn.discover-button {
+  background-color: #7c981d;
+  font-size: 1.5rem !important;
+  color: white !important;
+}
+
 .navbar .nav-item .nav-link {
   font-size: 1rem;
 }
@@ -63,9 +66,15 @@ body {
   font-size: 1rem;
 }
 
-.navbar .dropdown-menu a:not(.active):hover {
+.navbar .dropdown-menu a:not(.active):hover,
+.navbar .dropdown-menu a.active:hover {
   color: #a6c !important;
   font-weight: 600 !important;
+  background-color: #570e0e !important;
+}
+
+.navbar .dropdown-menu .dropdown-item.waves-light:hover {
+  background-color: white !important;
 }
 
 .white-overlay {
@@ -142,4 +151,25 @@ body {
 .recipe-details {
   font-size: .9rem;
   text-align: center;
+}
+
+.search-placeholder::-webkit-input-placeholder {
+  color: #c7c7c7 !important;
+}
+
+.search-placeholder:-ms-input-placeholder {
+  color: #c7c7c7 !important;
+}
+
+.search-placeholder::-ms-input-placeholder {
+  color: #c7c7c7 !important;
+}
+
+.search-placeholder::placeholder {
+  color: #c7c7c7 !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #ff8700;
+  color: #000;
 }
