@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 from .forms import RecipeForm
 from .models import Recipe
 
@@ -10,8 +11,8 @@ from .models import Recipe
 def recipes(request):
     """Renders the recipes page"""
 
-    all_recipes = Recipe.objects.all().order_by("-name")
-    paginator = Paginator(all_recipes, 3)
+    recipes = Recipe.objects.all().order_by("-name")
+    paginator = Paginator(recipes, 3)
     page = request.GET.get("page")
     paged_recipes = paginator.get_page(page)
 
@@ -93,19 +94,30 @@ def delete_recipe(request, recipe_id):
 
 
 def search(request):
-    """Performs search"""
-    queryset_list = Recipe.objects.order_by("-name")
+    """Performs search by keyword"""
 
-    # Keywords
-    if "keywords" in request.GET:
-        keywords = request.GET["keywords"]
-        if keywords:
-            queryset_list = queryset_list.filter(name__icontains=keywords)
+    recipes = Recipe.objects.all()
+    query = None
+
+    if request.GET:
+        if "keywords" in request.GET:
+            query = request.GET["keywords"]
+            if not query:
+                messages.error(
+                    request, "You didn't enter any search criteria!"
+                )
+                return redirect(reverse("recipes"))
+
+            queries = Q(name__icontains=query) | Q(
+                description__icontains=query
+            )
+            recipes = recipes.filter(queries)
 
     template = "recipes/recipes.html"
     context = {
-        "recipes": queryset_list,
-        "values": request.GET,
+        "recipes": recipes,
+        "search_term": query,
         "from_search": True,
     }
+
     return render(request, template, context)

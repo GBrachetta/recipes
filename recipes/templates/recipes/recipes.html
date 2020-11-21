@@ -2,9 +2,24 @@
 
 {% block content %}
 <div class="white-overlay"></div>
-{% if recipes %}
 <div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col text-center">
+            {% if from_search %}
+            {% if recipes %}
+            <h3>
+                {{ recipes|length }} Results containing <strong>{{ search_term }}</strong>
+            </h3>
+            {% else %}
+            <h3>
+                No results for your query <strong>{{ search_term }}</strong>
+            </h3>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
     <div class="row">
+        {% if recipes %}
         {% for recipe in recipes %}
         <!-- Card -->
         <div class="col col-md-6 col-lg-4 col-xl-3 mb-3">
@@ -40,7 +55,14 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
     </div>
+    {% if from_search %}
+    <div class="col text-center">
+        <a class="btn btn-back" href="{% url 'recipes' %}">To all recipes</a>
+    </div>
+    <div class="spacer"></div>
+    {% endif %}
     <!-- Pagination -->
     <div class="row">
         <div class="col">
@@ -82,5 +104,4 @@
 </div>
 
 <div class="spacer"></div>
-{% endif %}
 {% endblock content %}
