@@ -16,13 +16,13 @@
                 </div>
                 <div class="col-4">
                     <p class="recipe-details">
-                    <span><i class="fas fa-dollar-sign text-secondary"></i></span>
+                        <span><i class="fas fa-dollar-sign text-secondary"></i></span>
                         Cost: €{{ recipe.price }}
                 </div>
                 </p>
                 <div class="col-4">
                     <p class="recipe-details">
-                    <span><i class="fas fa-clock text-secondary"></i></span>
+                        <span><i class="fas fa-clock text-secondary"></i></span>
                         Prep time: {{ recipe.time }} mins.
                 </div>
                 </p>
@@ -42,6 +42,9 @@
         </div>
     </div>
     <a class="btn btn-back" href="{% url 'recipes' %}">Back to Recipes</a>
+    <a class="btn btn-delete" href="#" data-toggle="modal" data-target="#deleteRecipeModal">Delete Recipe</a>
+    <a class="btn btn-go" href="{% url 'edit_recipe' recipe.id %}">Edit Recipe</a>
 </div>
 <div class="spacer"></div>
+{% include 'recipes/includes/modal_delete.html' %}
 {% endblock %}

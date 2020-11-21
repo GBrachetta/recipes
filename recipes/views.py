@@ -47,3 +47,41 @@ def add_recipe(request):
     context = {"form": form, "recipes": "active"}
 
     return render(request, template, context)
+
+
+@login_required
+def edit_recipe(request, recipe_id):
+    """Edit an existing recipe"""
+    if not request.user.is_superuser:
+        messages.error(request, "Reserved to administrators.")
+        return redirect(reverse("home"))
+
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+
+    if request.method == "POST":
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully updated recipe.")
+            return redirect(reverse("recipes"))
+        else:
+            messages.error(request, "Failed to update. Please check the form.")
+    else:
+        form = RecipeForm(instance=recipe)
+
+    template = "recipes/edit_recipe.html"
+    context = {"form": form, "recipe": recipe, "recipes": "active"}
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_recipe(request, recipe_id):
+    """Delete a recipe"""
+    if not request.user.is_superuser:
+        messages.error(request, "Reserved to administrators.")
+        return redirect(reverse("recipes"))
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    recipe.delete()
+    messages.success(request, "Recipe deleted.")
+    return redirect(reverse("recipes"))

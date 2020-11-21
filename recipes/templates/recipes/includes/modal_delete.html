@@ -1,0 +1,20 @@
+<!-- Modal Delete -->
+<div class="modal fade top" id="deleteRecipeModal" tabindex="-1" role="dialog"
+    aria-labelledby="deleteRecipeModal" aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-body bg-warning">
+                <div
+                    class="row d-flex justify-content-center align-items-center">
+                    <p class="pt-3 pr-2 lead">Are you sure you want to delete
+                        <span class="font-weight-bold">{{ recipe.name }}</span>?
+                    </p>
+                    <button type="button" class="btn btn-back"
+                        data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger"
+                        href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

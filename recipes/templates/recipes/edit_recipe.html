@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-3 mb-5">
+    <div class="white-overlay"></div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <h2 class="mb-4">Recipes Management</h2>
+            <h5 class="text-muted">Edit Recipe</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <form method="POST" action="{% url 'edit_recipe' recipe.id %}" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name != 'image' %}
+                <!--Renders as crispy if field is not image-->
+                {{ field | as_crispy_field }}
+                {% else %}
+                <!--Else renders it normally-->
+                {{ field }}
+                {% endif %}
+                {% endfor %}
+                <div class="text-right">
+                    <a class="btn btn-back" href="{% url 'recipes' %}">Cancel</a>
+                    <button class="btn btn-go" type="submit">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="spacer"></div>
+{% endblock %}
+
+{% block postjs %}
+{{ block.super }}
+<script src="{% static 'recipes/js/scripts.js' %}" type="text/javascript"></script>
+{% endblock %}
