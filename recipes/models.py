@@ -4,8 +4,9 @@ from io import BytesIO
 from django.core.files import File
 from django.db import models
 from django.core.validators import FileExtensionValidator
-from PIL import Image
 from django.utils.html import mark_safe
+from django.utils import timezone
+from PIL import Image
 
 
 def random_filename(instance, filename):
@@ -47,9 +48,11 @@ class Recipe(models.Model):
     """Recipe Class"""
 
     name = models.CharField(max_length=254)
-    description = models.TextField()
+    description = models.CharField(max_length=255)
+    instructions = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     time = models.IntegerField()
+    created = models.DateTimeField(editable=False)
     image = models.ImageField(
         upload_to=random_filename,
         null=True,
@@ -61,12 +64,14 @@ class Recipe(models.Model):
     )
 
     def save(self, *args, **kwargs):
+        self.created = timezone.now()
         if self.image:
             self.thumbnail = make_thumbnail(self.image, size=(600, 600))
 
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
+        
 
     @property
     def thumbnail_preview(self):

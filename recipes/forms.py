@@ -10,7 +10,14 @@ class RecipeForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        fields = ("name", "description", "price", "time", "image")
+        fields = (
+            "name",
+            "description",
+            "instructions",
+            "price",
+            "time",
+            "image",
+        )
 
     image = forms.ImageField(
         label="Image", required=False, widget=CustomClearableFileInput
