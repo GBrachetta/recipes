@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RecipeForm
@@ -14,6 +14,16 @@ def recipes(request):
     return render(request, "recipes/recipes.html", context)
 
 
+def recipe_detail(request, recipe_id):
+    """Display a single recipe"""
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+
+    context = {"recipe": recipe, "recipes": "active"}
+    template = "recipes/recipe.html"
+
+    return render(request, template, context)
+
+
 @login_required
 def add_recipe(request):
     """Add recipe"""
@@ -26,7 +36,7 @@ def add_recipe(request):
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.info(request, "Recipe added.")
+            messages.success(request, "Recipe added.")
             return redirect(reverse("recipes"))
 
         messages.error(request, "Failed to add recipe. Please check the form.")

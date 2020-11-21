@@ -18,9 +18,11 @@
         <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" />
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/materia/bootstrap.min.css">
-        <link
+        {% comment %} <link
             href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
-            rel="stylesheet">
+            rel="stylesheet"> {% endcomment %}
+        <link rel="stylesheet" href="{% static 'css/mdb.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/cards-extended.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/main.css' %}" />
         {% endblock css %}
 
@@ -44,8 +46,7 @@
             crossorigin="anonymous">
             </script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script src="{% static 'js/mdb.js' %}"></script>
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/9464f43776.js"
             crossorigin="anonymous">
@@ -67,13 +68,11 @@
             <!--Messages-->
             {% if messages %}
             {% for message in messages %}
-
             <div id="message" class="container">
-                <div class="alert alert-{{ message.tags }} alert-dismissable text-center"
-                    role="alert">
-                    <button class="close" type="button"
-                        data-dismiss="alert"><span
-                            aria-hidden="true">&times;</span></button>
+                <div class="alert alert-{{ message.tags }} alert-dismissible text-center fade show" role="alert">
+                    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <strong>
                         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
                         Error:
