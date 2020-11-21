@@ -36,6 +36,10 @@ body {
   background-color: #e8f3c1;
 }
 
+.btn-delete {
+  background-color: #ffb766;
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
