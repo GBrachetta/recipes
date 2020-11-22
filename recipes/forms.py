@@ -18,7 +18,9 @@ class RecipeForm(forms.ModelForm):
             "price",
             "time",
             "image",
+            "tags",
         )
+        widgets = {"tags": forms.TextInput(attrs={"data-role": "tagsinput"})}
 
     image = forms.ImageField(
         label="Image", required=False, widget=CustomClearableFileInput

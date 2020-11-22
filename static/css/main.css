@@ -58,10 +58,6 @@ body {
   color: white !important;
 }
 
-.btn:not(:disabled):not(.disabled) {
-  color: #cc0000 !important;
-}
-
 .navbar .nav-item .nav-link {
   font-size: 1rem;
 }
@@ -176,4 +172,8 @@ body {
 .pagination .page-item.active .page-link {
   background-color: #ff8700;
   color: #000;
+}
+
+.allauth-form-inner-content label:not([for='id_remember']) {
+  display: none;
 }
