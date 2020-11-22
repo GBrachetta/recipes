@@ -12,7 +12,7 @@ def recipes(request):
     """Renders the recipes page"""
 
     recipes = Recipe.objects.all().order_by("-name")
-    paginator = Paginator(recipes, 3)
+    paginator = Paginator(recipes, 8)
     page = request.GET.get("page")
     paged_recipes = paginator.get_page(page)
 

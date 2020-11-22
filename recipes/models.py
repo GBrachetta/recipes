@@ -46,10 +46,18 @@ def make_thumbnail(image, size=(600, 600)):
 
 class Recipe(models.Model):
     """Recipe Class"""
+    DIFFICULTIES = (
+        ('1', 'Easy'),
+        ('2', 'Fair'),
+        ('3', 'Moderate'),
+        ('4', 'Difficult'),
+        ('5', 'Expert'),
+    )
 
     name = models.CharField(max_length=254)
     description = models.CharField(max_length=255)
     instructions = models.TextField()
+    difficulty = models.CharField(max_length=1, choices=DIFFICULTIES, default=3)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     time = models.IntegerField()
     created = models.DateTimeField(editable=False)

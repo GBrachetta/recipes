@@ -48,7 +48,21 @@
                         <p class="card-text collapse" id="collapseContent-{{ recipe.id }}">
                             {{ recipe.description|linebreaksbr }}</p>
                         <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed" data-toggle="collapse" href="#collapseContent-{{ recipe.id }}" aria-expanded="false" aria-controls="collapseContent"></a>
-                        <i class="fas fa-share-alt text-muted float-right p-1 my-1" data-toggle="tooltip" data-placement="top" title="Share this post"></i>
+                        {% if recipe.difficulty == '1' %}
+                        <span><i class="fas fa-circle text-success float-right p-1 my-1"></i></span>
+                        {% endif %}
+                        {% if recipe.difficulty == '2' %}
+                        <span><i class="fas fa-circle text-primary float-right p-1 my-1"></i></span>
+                        {% endif %}
+                        {% if recipe.difficulty == '3' %}
+                        <span><i class="fas fa-circle text-secondary float-right p-1 my-1"></i></span>
+                        {% endif %}
+                        {% if recipe.difficulty == '4' %}
+                        <span><i class="fas fa-circle text-warning float-right p-1 my-1"></i></span>
+                        {% endif %}
+                        {% if recipe.difficulty == '5' %}
+                        <span><i class="fas fa-circle text-danger float-right p-1 my-1"></i></span>
+                        {% endif %}
                         <i class="fas fa-heart text-muted float-right p-1 my-1 mr-3" data-toggle="tooltip" data-placement="top" title="I like it"></i>
                     </div>
                 </div>

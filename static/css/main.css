@@ -58,6 +58,10 @@ body {
   color: white !important;
 }
 
+.btn:not(:disabled):not(.disabled) {
+  color: #cc0000 !important;
+}
+
 .navbar .nav-item .nav-link {
   font-size: 1rem;
 }

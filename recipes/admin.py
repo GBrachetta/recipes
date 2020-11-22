@@ -8,6 +8,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
     list_display = (
         "name",
+        "difficulty",
         "created",
         "price",
         "time",
