@@ -12,6 +12,7 @@ django-allauth = "*"
 django-crispy-forms = "*"
 django-cleanup = "*"
 pillow = "*"
+django-taggit = "*"
 
 [dev-packages]
 pylint-django = "*"
