@@ -7,6 +7,7 @@ from django.core.validators import FileExtensionValidator
 from django.utils.html import mark_safe
 from django.utils import timezone
 from PIL import Image
+from taggit.managers import TaggableManager
 
 
 def random_filename(instance, filename):
@@ -70,6 +71,7 @@ class Recipe(models.Model):
     thumbnail = models.ImageField(
         upload_to=random_filename, null=True, blank=True
     )
+    tags = TaggableManager(blank=True)
 
     def save(self, *args, **kwargs):
         self.created = timezone.now()
