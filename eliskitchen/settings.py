@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "crispy_forms",
     "django_cleanup.apps.CleanupConfig",
+    "taggit",
     "home",
     "recipes",
 ]
@@ -66,6 +67,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = "eliskitchen.urls"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+TAGGIT_CASE_INSENSITIVE = True
 
 TEMPLATES = [
     {
@@ -92,12 +95,12 @@ TEMPLATES = [
 ]
 
 ACCOUNT_FORMS = {
-    "login": "eliskitchen.forms.SelfLoginForm",
-    "signup": "eliskitchen.forms.SelfSignupForm",
+    "login": "allauth.account.forms.LoginForm",
+    "signup": "allauth.account.forms.SignupForm",
     "add_email": "allauth.account.forms.AddEmailForm",
     "change_password": "allauth.account.forms.ChangePasswordForm",
     "set_password": "allauth.account.forms.SetPasswordForm",
-    "reset_password": "eliskitchen.forms.SelfResetPasswordForm",
+    "reset_password": "allauth.account.forms.ResetPasswordForm",
     "reset_password_from_key": "allauth.account.forms.ResetPasswordKeyForm",
     "disconnect": "allauth.socialaccount.forms.DisconnectForm",
 }
@@ -152,20 +155,16 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-        NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
