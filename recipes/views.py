@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.template.defaultfilters import slugify
 from django.db.models import Q
 from .forms import RecipeForm
 from .models import Recipe
@@ -41,7 +42,13 @@ def add_recipe(request):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # form.save()
+            # messages.success(request, "Recipe added.")
+            # return redirect(reverse("recipes"))
+            new_recipe = form.save(commit=False)
+            new_recipe.slug = slugify(new_recipe.name)
+            new_recipe.save()
+            form.save_m2m()
             messages.success(request, "Recipe added.")
             return redirect(reverse("recipes"))
 
@@ -67,8 +74,14 @@ def edit_recipe(request, recipe_id):
     if request.method == "POST":
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
-            form.save()
-            messages.success(request, "Successfully updated recipe.")
+            # form.save()
+            # messages.success(request, "Successfully updated recipe.")
+            # return redirect(reverse("recipes"))
+            updated_recipe = form.save(commit=False)
+            updated_recipe.slug = slugify(updated_recipe.name)
+            updated_recipe.save()
+            form.save_m2m()
+            messages.success(request, "Recipe added.")
             return redirect(reverse("recipes"))
         else:
             messages.error(request, "Failed to update. Please check the form.")
