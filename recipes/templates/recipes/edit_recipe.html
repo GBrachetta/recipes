@@ -18,13 +18,13 @@
             <form method="POST" action="{% url 'edit_recipe' recipe.id %}" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% for field in form %}
-                {% if field.name != 'image' %}
-                <!--Renders as crispy if field is not image-->
+                {% if field.name != 'tags' %}
+                <!--Renders as crispy if field is not tags-->
                 {{ field | as_crispy_field }}
-                {% elif field.tags %}
                 {% else %}
                 <!--Else renders it normally-->
-                {{ field }}
+                <input type="text" name="tags" placeholder data-role="tagsinput" value="{{ recipe.tags.all|join:" , "}}">
+                <small id="hint_id_tags" class="form-text text-muted mb-3">A comma-separated list of tags.</small>
                 {% endif %}
                 {% endfor %}
                 <div class="text-right">

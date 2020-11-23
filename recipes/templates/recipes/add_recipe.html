@@ -17,15 +17,7 @@
         <div class="col-12 col-md-6">
             <form method="POST" action="{% url 'add_recipe' %}" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% for field in form %}
-                {% if field.name != 'image' %}
-                <!--Renders as crispy if field is not image-->
-                {{ field | as_crispy_field }}
-                {% else %}
-                <!--Else renders it normally-->
-                {{ field }}
-                {% endif %}
-                {% endfor %}
+                {{ form|crispy }}
                 <div class="text-right">
                     <a class="btn btn-back" href="{% url 'recipes' %}">Cancel</a>
                     <button class="btn btn-go" type="submit">
