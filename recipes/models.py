@@ -4,6 +4,7 @@ from io import BytesIO
 from django.core.files import File
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.db.models.deletion import CASCADE
 from django.utils.html import mark_safe
 from django.utils import timezone
 from PIL import Image
@@ -45,20 +46,38 @@ def make_thumbnail(image, size=(600, 600)):
     return thumbnail
 
 
+class Category(models.Model):
+    """Category model"""
+
+    name = models.CharField(max_length=150, db_index=True)
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        ordering = ("-name",)
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     """Recipe Class"""
+
     DIFFICULTIES = (
-        ('1', 'Easy'),
-        ('2', 'Fair'),
-        ('3', 'Moderate'),
-        ('4', 'Difficult'),
-        ('5', 'Expert'),
+        ("1", "Easy"),
+        ("2", "Fair"),
+        ("3", "Moderate"),
+        ("4", "Difficult"),
+        ("5", "Expert"),
     )
 
+    category = models.ForeignKey(Category, on_delete=CASCADE, null=True)
     name = models.CharField(max_length=254)
     description = models.CharField(max_length=255)
     instructions = models.TextField()
-    difficulty = models.CharField(max_length=1, choices=DIFFICULTIES, default=3)
+    difficulty = models.CharField(
+        max_length=1, choices=DIFFICULTIES, default=3
+    )
     price = models.DecimalField(max_digits=5, decimal_places=2)
     time = models.IntegerField()
     created = models.DateTimeField(editable=False)

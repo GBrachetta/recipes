@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import Recipe
+from .models import Recipe, Category
 
 
-# Register your models here.
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug")
+    ordering = ("name",)
+
+
 class RecipeAdmin(admin.ModelAdmin):
     """Admin control of recipes"""
 
@@ -29,3 +33,4 @@ class RecipeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Recipe, RecipeAdmin)
+admin.site.register(Category, CategoryAdmin)

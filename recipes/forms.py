@@ -11,6 +11,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = (
+            "category",
             "name",
             "description",
             "instructions",
