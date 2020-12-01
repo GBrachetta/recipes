@@ -198,7 +198,7 @@ def search(request):
 
             queries = Q(name__icontains=query) | Q(
                 description__icontains=query
-            )
+            ) | Q(category__name__icontains=query)
             recipes = recipes.filter(queries)
 
     template = "recipes/recipes.html"
