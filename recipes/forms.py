@@ -1,7 +1,7 @@
 from django import forms
 
 # from .widgets import CustomClearableFileInput
-from .models import Recipe
+from .models import Recipe, Category
 from .widgets import CustomClearableFileInput
 
 
@@ -28,3 +28,9 @@ class RecipeForm(forms.ModelForm):
     )
 
     thumbnail = image.hidden_widget
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ("name",)

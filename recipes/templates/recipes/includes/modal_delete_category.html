@@ -1,0 +1,19 @@
+<!-- Modal Delete -->
+<div class="modal fade top" id="deleteCategoryModal-{{ forloop.counter }}" tabindex="-1" role="dialog"
+    aria-labelledby="deleteCategoryModal-{{ forloop.counter }}" aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-body bg-warning">
+                <div
+                    class="row d-flex justify-content-center align-items-center">
+                    <p class="pt-3 pr-2 lead">Are you sure you want to delete
+                        <span class="font-weight-bold">{{ category.name }}</span>?
+                    </p>
+                    <button type="button" class="btn btn-back"
+                        data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger remove-button remove_{{ category.id }}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

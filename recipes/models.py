@@ -9,6 +9,7 @@ from django.utils.html import mark_safe
 from django.utils import timezone
 from PIL import Image
 from taggit.managers import TaggableManager
+from django.template.defaultfilters import slugify
 
 
 def random_filename(instance, filename):
@@ -46,15 +47,29 @@ def make_thumbnail(image, size=(600, 600)):
     return thumbnail
 
 
+def get_random_code():
+    """Provides a random string to append to slug when users with same name"""
+
+    code = str(uuid.uuid4())[:8].replace("-", "").lower()
+    return code
+
+
 class Category(models.Model):
     """Category model"""
 
-    name = models.CharField(max_length=150, db_index=True)
-    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=150, db_index=True, unique=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     class Meta:
-        ordering = ("-name",)
+        ordering = ("name",)
         verbose_name_plural = "Categories"
+
+    def clean(self):
+        self.name = self.name.capitalize()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(str(self.name))
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

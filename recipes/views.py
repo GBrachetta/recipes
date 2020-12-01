@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.template.defaultfilters import slugify
 from django.db.models import Q
-from .forms import RecipeForm
-from .models import Recipe
+from .forms import RecipeForm, CategoryForm
+from .models import Category, Recipe
 
 
 # Create your views here.
@@ -19,6 +19,15 @@ def recipes(request):
 
     context = {"recipes": paged_recipes, "recipe": "active"}
     return render(request, "recipes/recipes.html", context)
+
+
+def categories(request):
+    """Renders the categories page"""
+
+    categories = Category.objects.all().order_by("name")
+
+    context = {"categories": categories, "recipe": "active"}
+    return render(request, "recipes/categories.html", context)
 
 
 def recipe_detail(request, recipe_id):
@@ -58,6 +67,60 @@ def add_recipe(request):
 
     template = "recipes/add_recipe.html"
     context = {"form": form, "recipes": "active"}
+
+    return render(request, template, context)
+
+
+@login_required
+def add_category(request):
+    """Add category"""
+
+    if not request.user.is_superuser:
+        messages.error(request, "Reserved to administrators.")
+        return redirect(reverse("recipes"))
+
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Category added.")
+            return redirect(reverse("categories"))
+        messages.error(request, "Failed to add recipe. Please check the form.")
+    else:
+        form = CategoryForm()
+
+    template = "recipes/add_category.html"
+    context = {"form": form, "recipes": "active"}
+
+    return render(request, template, context)
+
+
+@login_required
+def edit_category(request, category_id):
+    """Edit category"""
+
+    if not request.user.is_superuser:
+        messages.error(request, "Reserved to administrators.")
+        return redirect(reverse("recipes"))
+
+    category = get_object_or_404(Category, pk=category_id)
+
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Category edited.")
+            return redirect(reverse("categories"))
+        messages.error(request, "Failed to update. Please check the form.")
+    else:
+        form = CategoryForm(instance=category)
+
+    template = "recipes/edit_category.html"
+    context = {
+        "form": form,
+        "category": category,
+        "recipes": "active",
+    }
 
     return render(request, template, context)
 
@@ -104,6 +167,18 @@ def delete_recipe(request, recipe_id):
     recipe.delete()
     messages.success(request, "Recipe deleted.")
     return redirect(reverse("recipes"))
+
+
+@login_required
+def delete_category(request, category_id):
+    """Delete a category"""
+    if not request.user.is_superuser:
+        messages.error(request, "Reserved to administrators.")
+        return redirect(reverse("categories"))
+    category = get_object_or_404(Category, pk=category_id)
+    category.delete()
+    messages.success(request, "Category deleted.")
+    return redirect(reverse("categories"))
 
 
 def search(request):

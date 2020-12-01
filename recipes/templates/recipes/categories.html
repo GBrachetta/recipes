@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="white-overlay"></div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col">
+            <h2 class="mb-4">Categories</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% if categories %}
+        {% for category in categories %}
+        <!-- Card -->
+        <div class="col col-md-6 col-lg-4 col-xl-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="font-weight-bold">{{ category.name }}</p>
+                    <a href="{% url 'edit_category' category.id %}" class="ml-0 float-left btn btn-sm btn-warning">Edit</a>
+                    <a class="text-danger btn btn-danger" title="Remove" data-toggle="modal" data-target="#deleteCategoryModal-{{ forloop.counter }}">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% include 'recipes/includes/modal_delete_category.html' %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    <a href="{% url 'add_category' %}" class="btn btn-secondary ml-0">Add category</a>
+</div>
+
+<div class="spacer"></div>
+
+{% endblock content %}
+
+{% block postjs %}
+{{ block.super}}
+<script>
+    $(".remove-button").on("click", function(e) {
+        let csrfToken = "{{ csrf_token }}";
+        let itemId = $(this).attr("class").split("remove_")[1].slice(0, -25)
+        let url = `/recipes/delete_category/${itemId}/`;
+        let data = {
+            csrfmiddlewaretoken: csrfToken,
+        };
+        console.log(csrfToken)
+
+        $.post(url, data).done(function() {
+            location.reload();
+        });
+    });
+</script>
+{% endblock postjs %}
