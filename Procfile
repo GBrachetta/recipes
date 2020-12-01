@@ -1,1 +1,1 @@
-web: gunicorn eliskitchen.wsgi:application
+web: gunicorn eliskitchen.wsgi
