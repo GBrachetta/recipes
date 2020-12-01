@@ -32,11 +32,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG") == "True"
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "elisas-kitchen.herokuapp.com",
     "elisaskitchen.club",
     "www.elisaskitchen.club",
+    "elisas-kitchen.herokuapp.com",
+    "127.0.0.1",
+    "localhost",
 ]
 
 
